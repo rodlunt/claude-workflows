@@ -159,6 +159,7 @@ Ask: "Where will this project be deployed?"
 - [ ] **Google Cloud** - GCP services (Cloud Run, Firebase)
 - [ ] **Docker** - Self-hosted / any platform
 - [ ] **Fly.io** - Edge deployment
+- [ ] **Self Hosted** - On own server
 - [ ] **Other** - Specify
 
 **2. Environment tiers?**
