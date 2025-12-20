@@ -1,22 +1,20 @@
-# Claude Workflows - Project Starter Reference
+# Claude Workflows - Project Starter Templates
 
-A reference folder for starting new projects with Claude Code. Contains workflows, templates, and best practices.
+A template folder for starting new projects with Claude Code. Run the `/setup` wizard to generate a customized CLAUDE.md for your project.
 
 ## Quick Start
 
-When starting a new project:
+**Option 1: Interactive Setup (Recommended)**
+```bash
+# In your new project directory
+claude "/setup"
+```
 
-1. **Copy the CLAUDE.md template** to your project root:
-   ```bash
-   cp templates/CLAUDE.md /path/to/your/project/CLAUDE.md
-   ```
-
-2. **Copy GitHub Actions** (optional) for automated reviews:
-   ```bash
-   cp -r templates/.github /path/to/your/project/
-   ```
-
-3. **Customize** the CLAUDE.md with your project's specifics
+**Option 2: Manual Setup**
+1. Copy the templates folder contents to your project
+2. Edit CLAUDE.md with your project specifics
+3. Copy `.claude/commands/` for slash commands
+4. Copy `.github/workflows/` for automated PR reviews
 
 ---
 
@@ -24,66 +22,56 @@ When starting a new project:
 
 ```
 claude-workflows/
-├── templates/              # Ready-to-use templates
-│   ├── CLAUDE.md           # Project config template for Claude
-│   └── .github/workflows/  # GitHub Actions for automated reviews
-│       ├── code-review.yml
-│       └── security-review.yml
-│
-├── code-review/            # Code review reference docs
-│   ├── pragmatic-code-review-slash-command.md
-│   └── pragmatic-code-review-subagent.md
-│
-├── security-review/        # Security review reference docs
-│   └── security-review-slash-command.md
-│
-└── design-review/          # Design review reference docs
-    ├── design-review-agent.md
-    ├── design-principles-example.md
-    └── design-review-slash-command.md
+└── templates/
+    ├── CLAUDE.md                    # Project config template
+    ├── .claude/commands/            # Slash commands
+    │   ├── setup.md                 # Interactive project wizard
+    │   ├── review.md                # Code review (Pragmatic Quality)
+    │   ├── security-review.md       # Security scan (OWASP-based)
+    │   ├── design-review.md         # UI/UX review (Playwright)
+    │   ├── test.md                  # Run tests and fix failures
+    │   ├── deploy.md                # Deploy to staging/production
+    │   └── docs.md                  # Generate documentation
+    └── .github/workflows/           # GitHub Actions
+        ├── code-review.yml          # Automated code review on PRs
+        └── security-review.yml      # Automated security scan on PRs
 ```
 
 ---
 
-## What's Included
+## Available Slash Commands
 
-### Templates (`/templates`)
+| Command | Description |
+|---------|-------------|
+| `/setup` | Interactive project setup wizard |
+| `/review` | Pragmatic code review (architecture, logic, security, tests) |
+| `/security-review` | OWASP-based security scan (>80% confidence filter) |
+| `/design-review` | UI/UX review (requires Playwright MCP) |
+| `/test` | Run tests and fix any failures |
+| `/deploy` | Deploy to staging or production |
+| `/docs` | Generate or update documentation |
 
-| File | Purpose |
-|------|---------|
-| `CLAUDE.md` | Project configuration file that Claude reads automatically. Defines tech stack, conventions, commands, and review guidelines. |
-| `.github/workflows/code-review.yml` | GitHub Action for automated code review on PRs |
-| `.github/workflows/security-review.yml` | GitHub Action for automated security scanning on PRs |
+---
 
-### Code Review (`/code-review`)
+## What the Setup Wizard Configures
 
-"Pragmatic Quality" framework - balances engineering standards with development speed.
-
-- **Slash command:** Run `/review` for on-demand code analysis
-- **Subagent:** Detailed review with 7 priority levels (architecture → documentation)
-- **Triage:** Critical/Blocker → Improvement → Nit
-
-### Security Review (`/security-review`)
-
-OWASP-based vulnerability scanning with high-confidence filtering (>80%).
-
-- **Checks:** SQL injection, XSS, auth issues, secrets exposure, RCE
-- **Output:** Severity-classified findings with fix recommendations
-- **Goal:** Minimize false positives
-
-### Design Review (`/design-review`)
-
-Live UI testing using Playwright with industry best practices.
-
-- **7-phase review:** Interaction → Responsiveness → Visual Polish → Accessibility → Robustness → Code Health
-- **Standards:** Inspired by Stripe, Airbnb, Linear
-- **Accessibility:** WCAG 2.1 AA compliance
+1. **Project Type & Features** - What you're building and what it needs
+2. **Tech Stack** - Framework, backend, database, styling, testing
+3. **Project Structure** - Folder organization
+4. **Code Conventions** - TypeScript, naming, formatting, git style
+5. **Commands** - Package manager and scripts
+6. **Environment Variables** - Required secrets and config
+7. **Testing & CI/CD** - Test strategy, coverage, pipeline
+8. **Deployment** - Hosting platform, environments
+9. **Review Workflows** - Code, security, design reviews
+10. **MCP Servers** - Context7, Playwright, MUI, Mobile MCPs
+11. **Git & GitHub** - Initialize repo, create GitHub remote
 
 ---
 
 ## GitHub Secrets Required
 
-To use the GitHub Actions, add these secrets to your repository:
+For automated PR reviews, add these secrets to your repository:
 
 | Secret | Description |
 |--------|-------------|
@@ -92,35 +80,30 @@ To use the GitHub Actions, add these secrets to your repository:
 
 ---
 
-## Usage Tips
+## Recommended MCP Servers
 
-### CLAUDE.md Best Practices
-
-1. Keep it concise - Claude reads this every session
-2. Include your actual commands (dev, build, test, lint)
-3. Document architectural decisions
-4. List environment variables
-5. Add project-specific conventions
-
-### Running Reviews Manually
-
-```bash
-# Code review (in your project directory)
-claude "/review"
-
-# Security review
-claude "/security-review"
-
-# Design review (requires Playwright MCP)
-claude "/design-review"
-```
+| MCP | Purpose | Install Command |
+|-----|---------|-----------------|
+| **Context7** | Up-to-date library docs | `claude mcp add context7 -- npx -y @upstash/context7-mcp` |
+| **Playwright** | Browser automation/testing | `claude mcp add playwright -- npx -y @playwright/mcp` |
+| **MUI** | Material UI docs | `claude mcp add mui-mcp -- npx -y @mui/mcp@latest` |
+| **Mobile MCP** | iOS/Android automation | `claude mcp add mobile-mcp -- npx -y @anthropic/mobile-mcp` |
 
 ---
 
-## Customization
+## Review Frameworks
 
-Feel free to modify any templates to match your workflow. Common customizations:
+### Code Review (Pragmatic Quality)
+- Balances engineering standards with development speed
+- 7 priority levels: Architecture > Logic > Security > Performance > Tests > Style > Docs
+- Triage: Critical/Blocker > Improvement > Nit
 
-- Add your design system tokens to `design-principles-example.md`
-- Adjust review priorities in `pragmatic-code-review-subagent.md`
-- Add custom security rules to `security-review-slash-command.md`
+### Security Review
+- OWASP-based vulnerability scanning
+- Only flags issues with >80% exploit confidence
+- Categories: Injection, Auth, Crypto, Code Execution, Data Exposure
+
+### Design Review
+- Live UI testing via Playwright screenshots
+- Standards: Stripe, Airbnb, Linear quality
+- WCAG 2.1 AA accessibility compliance
