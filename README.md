@@ -1,5 +1,7 @@
 # Claude Workflows - Project Starter Templates
 
+[![Mentioned in awesome-claude-code-workflows](https://awesome.re/mentioned-badge.svg)](https://github.com/ithiria894/awesome-claude-code-workflows)
+
 A template folder for starting new projects with Claude Code. Run the `/setup` wizard to generate a customized CLAUDE.md for your project.
 
 ## Quick Start
