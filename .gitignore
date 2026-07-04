@@ -1,0 +1,28 @@
+# ── Secrets & credentials — never commit plaintext secrets ──
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+credentials.json
+*-credentials.json
+service-account*.json
+*.secret
+# SOPS/age-encrypted secrets ARE meant to be committed — never ignore them:
+!*.sops.yaml
+!*.sops.json
+!*.sops.env
+!*.enc.*
+
+# ── OS / editor cruft ──
+.DS_Store
+Thumbs.db
+*.swp
+*~
