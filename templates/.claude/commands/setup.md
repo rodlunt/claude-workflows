@@ -194,9 +194,11 @@ Ask: "Would you like to set up automated review workflows?"
 - [ ] Design Review - UI/UX, accessibility, responsiveness (requires Playwright)
 
 **2. How do you want to trigger reviews?**
-- [ ] **Slash commands** (`/review`, `/security-review`, `/design-review`) - Manual, on-demand
-- [ ] **GitHub Actions** - Automatic on every PR
-- [ ] **Both** (Recommended)
+- [ ] **Slash commands** (`/review`, `/security-review`, `/design-review`) - Manual, on-demand, runs inside your Claude Code session on your existing subscription. **(Recommended, default)**
+- [ ] **GitHub Actions** - Automatic on every PR. **Opt-in only; costs money and needs repo secrets.** Before selecting this, the wizard MUST spell out: the code-review workflow needs a `CLAUDE_CODE_OAUTH_TOKEN` repo secret (uses your Claude subscription quota) and the security-review workflow needs an `ANTHROPIC_API_KEY` repo secret (metered API billing, separate from any subscription). Until the secrets are set, both workflows fail visibly on every PR. Never select this silently or by default.
+- [ ] **Both** - Same caveats as GitHub Actions.
+
+If the user does not explicitly choose GitHub Actions after hearing the cost note, default to slash commands only and do NOT copy any workflow files.
 
 **3. Code review strictness?**
 - [ ] **Startup mode** - Balance speed with quality, focus on blockers only
@@ -227,7 +229,8 @@ If provided, Claude will:
 
 ### Based on Answers:
 
-- If **GitHub Actions** selected: Copy workflow files to `.github/workflows/`
+- If **GitHub Actions** explicitly selected (after the cost/secrets note): Copy workflow files to `.github/workflows/`
+- Otherwise: do NOT copy `code-review.yml` or `security-review.yml`; slash commands cover review with zero extra cost
 - If **Design Review** selected: Ensure Playwright MCP is installed
 - If **Custom design standards**: Ask for path to design docs
 
@@ -275,7 +278,8 @@ Ask which MCPs they want installed, then run the commands.
 
 Once confirmed:
 1. Create the CLAUDE.md file in the project root
-2. Offer to copy the GitHub Actions workflows for automated reviews
+2. Copy the GitHub Actions review workflows ONLY if the user opted in at
+   Step 10 after hearing the cost/secrets note (never copy them by default)
 
 ---
 
