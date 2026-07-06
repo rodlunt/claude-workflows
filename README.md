@@ -16,7 +16,15 @@ claude "/setup"
 1. Copy the templates folder contents to your project
 2. Edit CLAUDE.md with your project specifics
 3. Copy `.claude/commands/` for slash commands
-4. Copy `.github/workflows/` for automated PR reviews
+4. (Optional, costs money) Copy `.github/workflows/` for automated PR reviews
+
+> **Cost note:** the GitHub Actions review workflows are **opt-in, not a
+> default**. `code-review.yml` needs a `CLAUDE_CODE_OAUTH_TOKEN` repo secret
+> (runs on your Claude subscription quota) and `security-review.yml` needs an
+> `ANTHROPIC_API_KEY` repo secret (metered API billing). Until those secrets
+> exist the workflows fail on every PR. The slash commands (`/review`,
+> `/security-review`) cover the same ground inside your Claude Code session
+> at no extra cost, and the `/setup` wizard defaults to them.
 
 ---
 
