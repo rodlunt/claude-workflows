@@ -117,3 +117,7 @@ For automated PR reviews, add these secrets to your repository:
 - Live UI testing via Playwright screenshots
 - Standards: Stripe, Airbnb, Linear quality
 - WCAG 2.1 AA accessibility compliance
+
+---
+
+<sub>Built by [Rodney Lunt](https://rod.lunt.au). If this saved you some time, you can [buy me a coffee](https://buymeacoffee.com/rodlunt).</sub>
