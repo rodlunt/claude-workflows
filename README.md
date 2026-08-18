@@ -121,3 +121,5 @@ For automated PR reviews, add these secrets to your repository:
 ---
 
 <sub>Built by [Rodney Lunt](https://rod.lunt.au). If this saved you some time, you can [buy me a coffee](https://buymeacoffee.com/rodlunt).</sub>
+
+<sub>Licensed under [MIT](LICENSE).</sub>
